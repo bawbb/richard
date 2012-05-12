@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="atlas@2x.png">
+    <SubTexture name="GameboardSpace" x="10" y="10" width="80" height="80"/>
+    <SubTexture name="GameboardSpaceMarked" x="100" y="10" width="80" height="80"/>
+    <SubTexture name="GameboardBottomLeft" x="10" y="100" width="80" height="80" />
+    <SubTexture name="GameboardBottomMid" x="100" y="100" width="80" height="80" />
+    <SubTexture name="GameboardBottomRight" x="190" y="100" width="80" height="80" />
+</TextureAtlas>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:f13977977f710e5c1589ad8f683b0fa5$ -->
+<TextureAtlas imagePath="atlas.png">
+    <SubTexture name="BlockStandard_MoveAnimation0001" x="2" y="2" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0002" x="44" y="2" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0003" x="86" y="2" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0004" x="128" y="2" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0005" x="170" y="2" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0006" x="212" y="2" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0007" x="2" y="49" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0008" x="44" y="49" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0009" x="86" y="49" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0010" x="128" y="49" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0011" x="170" y="49" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0012" x="212" y="49" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0013" x="2" y="96" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0014" x="44" y="96" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0015" x="2" y="2" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0016" x="2" y="2" width="40" height="45"/>
+    <SubTexture name="GameboardEdge_End" x="86" y="96" width="40" height="40"/>
+    <SubTexture name="GameboardEdge_Mid" x="128" y="96" width="40" height="40"/>
+    <SubTexture name="GameboardSpace" x="170" y="96" width="40" height="40"/>
+    <SubTexture name="GameboardSpace_Marked" x="212" y="96" width="40" height="40"/>
+    <SubTexture name="GameboardSpace_Marker" x="2" y="143" width="25" height="22"/>
+</TextureAtlas>
