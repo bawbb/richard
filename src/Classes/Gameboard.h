@@ -10,7 +10,6 @@
 #import "Game.h"
 #import "GameboardSpace.h"
 #import "FlickDynamics.h"
-#import "GameboardMarker.h"
 
 @interface Gameboard : SPSprite
 {
@@ -38,9 +37,6 @@
     
     // Calculates Gameboard movement animation
     FlickDynamics *mFlickControl;
-    
-    GameboardMarker *mMarker;
-    
 }
 
 // Should be called when player quits to kill the next block tick timer

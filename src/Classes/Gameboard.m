@@ -50,7 +50,6 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
     [mCurrentSpace release];
     [mSpaces release];
     [mBlocks release];
-    [mMarker release];
     [super dealloc];
 }
 
@@ -136,8 +135,6 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
         [self addChild:block];
         [block release];
     }
-    
-    mMarker = [[GameboardMarker alloc] initWithSize:mSpaceSize * 0.5];
     
     // is the gameboard large enough to need to scroll?
     mScrollingNeeded = self.height > self.stage.height ? YES : NO;
@@ -236,10 +233,6 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
             if ([t isKindOfClass :[GameboardSpace class]])
             {
                 [self markSpace :((GameboardSpace *)t)];
-                
-                mMarker.x = t.x + (mSpaceSize / 2);
-                mMarker.y = t.y + ((mSpaceSize / 2) * 0.75);
-                [self addChild:mMarker atIndex:self.numChildren - 1];
             }
             else if ([t.parent isKindOfClass:[Block class]])
             {
@@ -250,7 +243,6 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
                     [mBlocks removeObject:(Block *)t.parent];
                     mCurrentSpace.marked = NO;
                     mCurrentSpace = nil;
-                    [self removeChild:mMarker];
                 }
             }
         }

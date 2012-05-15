@@ -17,6 +17,7 @@
 
 @synthesize resident;
 @synthesize size;
+@synthesize marked = mMarked;
 
 - (id)initWithPositionAndSize :(float)initsize :(float)x :(float)y
 {

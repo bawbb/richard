@@ -1,4 +1,4 @@
-//  THE BLOCK!!!
+//  
 //  Block.m
 //  Richard
 //
@@ -31,7 +31,7 @@
         [self addChild:blockImage];
         [blockImage release];*/
         
-        blockMovie = [[SPMovieClip alloc] initWithFrames:[Media atlasTexturesWithPrefix:@"BlockStandard_MoveAnimation"] fps:30];
+        blockMovie = [[SPMovieClip alloc] initWithFrames:[Media atlasTexturesWithPrefix:@"BlockStandard_MoveAnimation"] fps:15];
         blockMovie.loop = NO;
         blockMovie.pivotX = blockMovie.width / 2;
         blockMovie.pivotY = blockMovie.height / 2;
@@ -83,24 +83,29 @@
     mCurrentSpace.resident = self;
     
     // Tween movement
-    SPTween *moveTween = [SPTween tweenWithTarget:self time:0.5 transition:SP_TRANSITION_EASE_OUT];
-    moveTween.delay = [SPUtils randomFloat] * 0.1;
+    SPTween *moveTween = [SPTween tweenWithTarget:self time:1.0 transition:SP_TRANSITION_EASE_OUT];
+    //moveTween.delay = [SPUtils randomFloat] * 0.1;
     [moveTween animateProperty:@"y" targetValue:mCurrentSpace.y - ((mCurrentSpace.size * 1.125) - mCurrentSpace.size)];
     [[SPStage mainStage].juggler addObject:moveTween];
     
-    blockMovie.currentFrame = [SPUtils randomIntBetweenMin:0 andMax:3];
+    blockMovie.currentFrame = 0;
     [blockMovie play];
+    
+    if (mCurrentSpace.marked)
+        self.alpha = 0.75;
+    else
+        self.alpha = 1.0;
 }
 
 - (void)fallOffAndDie
 {
-    SPTween *scaleTween = [SPTween tweenWithTarget:[self childAtIndex:0] time:1.0 transition:SP_TRANSITION_EASE_OUT_IN];
+    SPTween *scaleTween = [SPTween tweenWithTarget:[self childAtIndex:0] time:2.0 transition:SP_TRANSITION_EASE_IN];
     [scaleTween animateProperty:@"scaleX" targetValue:0];
     [scaleTween animateProperty:@"scaleY" targetValue:0];
-    //[scaleTween animateProperty:@"alpha" targetValue:0.0];
+    [scaleTween animateProperty:@"alpha" targetValue:0.0];
     [[SPStage mainStage].juggler addObject:scaleTween];
     
-    SPTween *yTween = [SPTween tweenWithTarget:self time:0.5 transition:SP_TRANSITION_EASE_OUT];
+    SPTween *yTween = [SPTween tweenWithTarget:self time:1.0 transition:SP_TRANSITION_EASE_OUT];
     [yTween animateProperty:@"y" targetValue:self.y + self.height];
     [[SPStage mainStage].juggler addObject:yTween];
     
@@ -115,7 +120,7 @@
 {
     [self.parent setIndex:self.parent.numChildren - 1 ofChild:self];
     
-    SPTween *scaleTween = [SPTween tweenWithTarget:[self childAtIndex:0] time:1.0 transition:SP_TRANSITION_EASE_OUT_IN];
+    SPTween *scaleTween = [SPTween tweenWithTarget:[self childAtIndex:0] time:0.5 transition:SP_TRANSITION_EASE_OUT_IN];
     [scaleTween animateProperty:@"scaleX" targetValue:1.25];
     [scaleTween animateProperty:@"scaleY" targetValue:1.25];
     [scaleTween animateProperty:@"alpha" targetValue:0.0];

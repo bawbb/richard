@@ -13,8 +13,6 @@
 @interface GameboardSpace : SPImage
 {
     @private
-    
-    BOOL mMarked;
 }
 
 - (id)initWithPositionAndSize :(float)size :(float)x :(float)y;
