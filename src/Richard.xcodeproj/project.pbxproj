@@ -14,7 +14,6 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		333D53A41541F23400E9F6B6 /* Gameboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D53A31541F23300E9F6B6 /* Gameboard.m */; };
 		333D53A71541FFB400E9F6B6 /* GameboardSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D53A61541FFB400E9F6B6 /* GameboardSpace.m */; };
-		336EFA4C155F0FBF00553F64 /* libSparrow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 336EFA4B155F0FBF00553F64 /* libSparrow.a */; };
 		3383D097155E18FD00DFD0A7 /* atlas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383D096155E18FD00DFD0A7 /* atlas@2x.png */; };
 		3383D0A1155E21EF00DFD0A7 /* atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383D0A0155E21EF00DFD0A7 /* atlas.png */; };
 		3383D0A6155E487200DFD0A7 /* GameboardMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3383D0A5155E487200DFD0A7 /* GameboardMarker.m */; };
@@ -75,8 +74,7 @@
 		333D53A31541F23300E9F6B6 /* Gameboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gameboard.m; sourceTree = "<group>"; };
 		333D53A51541FFB400E9F6B6 /* GameboardSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameboardSpace.h; sourceTree = "<group>"; };
 		333D53A61541FFB400E9F6B6 /* GameboardSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameboardSpace.m; sourceTree = "<group>"; };
-		336EFA3E155F0ED500553F64 /* Sparrow.xcodeproj */ = {isa = PBXFileReference; path = Sparrow.xcodeproj; sourceTree = SPARROW_SRC; };
-		336EFA4B155F0FBF00553F64 /* libSparrow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSparrow.a; path = "../../../../Library/Developer/Xcode/DerivedData/Richard-gfstkhvfwxtkjffgsijzzeaadqll/Build/Products/Debug-iphoneos/libSparrow.a"; sourceTree = "<group>"; };
+		336EFA3E155F0ED500553F64 /* Sparrow.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Sparrow.xcodeproj; sourceTree = SPARROW_SRC; };
 		3383D096155E18FD00DFD0A7 /* atlas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "atlas@2x.png"; sourceTree = "<group>"; };
 		3383D0A0155E21EF00DFD0A7 /* atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atlas.png; sourceTree = "<group>"; };
 		3383D0A4155E487100DFD0A7 /* GameboardMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameboardMarker.h; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				336EFA4C155F0FBF00553F64 /* libSparrow.a in Frameworks */,
 				DE5C4E6E138ED109004892CA /* libz.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -195,7 +192,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				336EFA4B155F0FBF00553F64 /* libSparrow.a */,
 				DE5C4E6D138ED109004892CA /* libz.dylib */,
 				DE3F093711B7B9DC009D4DB0 /* AVFoundation.framework */,
 				DE3F093911B7B9DC009D4DB0 /* AudioToolbox.framework */,
