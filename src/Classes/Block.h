@@ -13,7 +13,6 @@
 @interface Block : SPSprite
 {
     @private
-    GameboardSpace *mCurrentSpace;
     SPMovieClip *blockMovie;
 }
 

@@ -17,20 +17,13 @@
 
 @implementation Block
 
+@synthesize currentSpace = mCurrentSpace;
+
 - (id)initAtSpace:(GameboardSpace *)space
 {
     if ((self = [super init]))
     {
-        // add block's image, set pivot to center
-        // (for scalling effects) and re center image
-        /*SPImage *blockImage = [[SPImage alloc] initWithTexture:[Media atlasTexture: @"BlockStandard_Idle"]];
-        blockImage.pivotX = blockImage.width / 2;
-        blockImage.pivotY = blockImage.height / 2;
-        blockImage.x = blockImage.width / 2;
-        blockImage.y = blockImage.height / 2;
-        [self addChild:blockImage];
-        [blockImage release];*/
-        
+        // setup and add movieclip child for rotation animation
         blockMovie = [[SPMovieClip alloc] initWithFrames:[Media atlasTexturesWithPrefix:@"BlockStandard_MoveAnimation"] fps:15];
         blockMovie.loop = NO;
         blockMovie.pivotX = blockMovie.width / 2;
@@ -46,7 +39,8 @@
         self.width = space.size;
         self.height = space.size * 1.125;
         mCurrentSpace = space;
-        space.resident = self;
+        
+        //add on frame event to wait for when main juggler is available.
         [self addEventListener:@selector(onFrame:) atObject:self forType:SP_EVENT_TYPE_ENTER_FRAME];
     }
     
@@ -55,36 +49,29 @@
 
 - (void)onFrame:(SPEvent *)event
 {
+    // we can add to the main juggler now that we got a frame, remove listener
     [self removeEventListener:@selector(onFrame:) atObject:self forType:SP_EVENT_TYPE_ENTER_FRAME];
     [[SPStage mainStage].juggler addObject:blockMovie];
 }
 
 - (void)dealloc
 {
-    NSLog(@"Block dealloc");
     [blockMovie release];
     [super dealloc];
 }
 
-- (GameboardSpace *)currentSpace
+-(GameboardSpace *)currentSpace
 {
     return mCurrentSpace;
 }
 
 - (void)setCurrentSpace:(GameboardSpace *)currentSpace
 {
-    // TODO: animate this action
-    
-    // Leaving current space
-    mCurrentSpace.resident = nil;
-    
     // Moving to new space
     mCurrentSpace = currentSpace;
-    mCurrentSpace.resident = self;
     
     // Tween movement
     SPTween *moveTween = [SPTween tweenWithTarget:self time:1.0 transition:SP_TRANSITION_EASE_OUT];
-    //moveTween.delay = [SPUtils randomFloat] * 0.1;
     [moveTween animateProperty:@"y" targetValue:mCurrentSpace.y - ((mCurrentSpace.size * 1.125) - mCurrentSpace.size)];
     [[SPStage mainStage].juggler addObject:moveTween];
     
@@ -92,7 +79,7 @@
     [blockMovie play];
     
     if (mCurrentSpace.marked)
-        self.alpha = 0.75;
+        self.alpha = 0.85;
     else
         self.alpha = 1.0;
 }

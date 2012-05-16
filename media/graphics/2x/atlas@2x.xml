@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:7a3f383c2732ba4b5d8c2db44546d30d$ -->
+<!-- $TexturePacker:SmartUpdate:573d47d74867c2c412d419ed3af9ca9c$ -->
 <TextureAtlas imagePath="atlas@2x.png">
     <SubTexture name="BlockStandard_MoveAnimation0001" x="5" y="5" width="80" height="90"/>
     <SubTexture name="BlockStandard_MoveAnimation0002" x="90" y="5" width="80" height="90"/>
@@ -22,5 +22,4 @@
     <SubTexture name="GameboardEdge_Mid" x="90" y="290" width="80" height="80"/>
     <SubTexture name="GameboardSpace" x="175" y="290" width="80" height="80"/>
     <SubTexture name="GameboardSpace_Marked" x="260" y="290" width="80" height="80"/>
-    <SubTexture name="GameboardSpace_Marker" x="345" y="290" width="50" height="43"/>
 </TextureAtlas>

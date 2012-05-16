@@ -8,8 +8,6 @@
 
 #import "SPImage.h"
 
-@class Block;
-
 @interface GameboardSpace : SPImage
 {
     @private
@@ -19,9 +17,6 @@
 
 // Has the player marked this?
 @property (nonatomic, assign) BOOL marked;
-
-// is there an "enemy" block on this space currently?
-@property (nonatomic, assign) Block *resident;
 
 // square size of block
 @property (nonatomic, assign) float size;

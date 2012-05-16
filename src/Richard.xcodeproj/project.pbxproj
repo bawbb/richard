@@ -14,10 +14,10 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		333D53A41541F23400E9F6B6 /* Gameboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D53A31541F23300E9F6B6 /* Gameboard.m */; };
 		333D53A71541FFB400E9F6B6 /* GameboardSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D53A61541FFB400E9F6B6 /* GameboardSpace.m */; };
+		333E24E515630D5F0093E578 /* libSparrow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F51A70155F103800E4A69C /* libSparrow.a */; };
+		333E24F3156322F50093E578 /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 333E24F2156322F50093E578 /* Block.m */; };
 		3383D097155E18FD00DFD0A7 /* atlas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383D096155E18FD00DFD0A7 /* atlas@2x.png */; };
 		3383D0A1155E21EF00DFD0A7 /* atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383D0A0155E21EF00DFD0A7 /* atlas.png */; };
-		338F183C1562EA8100F2C363 /* libSparrow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F51A70155F103800E4A69C /* libSparrow.a */; };
-		338F183F1562EC6700F2C363 /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 338F183E1562EC6700F2C363 /* Block.m */; };
 		33B67DF01545296900CA85B2 /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B67DEE1545296800CA85B2 /* MainMenuController.m */; };
 		33B67DF11545296900CA85B2 /* MainMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33B67DEF1545296800CA85B2 /* MainMenuController.xib */; };
 		33F7F247154331590069B49E /* FlickDynamics.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F7F246154331590069B49E /* FlickDynamics.m */; };
@@ -74,11 +74,11 @@
 		333D53A31541F23300E9F6B6 /* Gameboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gameboard.m; sourceTree = "<group>"; };
 		333D53A51541FFB400E9F6B6 /* GameboardSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameboardSpace.h; sourceTree = "<group>"; };
 		333D53A61541FFB400E9F6B6 /* GameboardSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameboardSpace.m; sourceTree = "<group>"; };
+		333E24F1156322F40093E578 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
+		333E24F2156322F50093E578 /* Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.m; sourceTree = "<group>"; };
 		336EFA3E155F0ED500553F64 /* Sparrow.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Sparrow.xcodeproj; sourceTree = SPARROW_SRC; };
 		3383D096155E18FD00DFD0A7 /* atlas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "atlas@2x.png"; sourceTree = "<group>"; };
 		3383D0A0155E21EF00DFD0A7 /* atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atlas.png; sourceTree = "<group>"; };
-		338F183D1562EC6700F2C363 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
-		338F183E1562EC6700F2C363 /* Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.m; sourceTree = "<group>"; };
 		33B67DED1545296800CA85B2 /* MainMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuController.h; sourceTree = "<group>"; };
 		33B67DEE1545296800CA85B2 /* MainMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuController.m; sourceTree = "<group>"; };
 		33B67DEF1545296800CA85B2 /* MainMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuController.xib; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				338F183C1562EA8100F2C363 /* libSparrow.a in Frameworks */,
+				333E24E515630D5F0093E578 /* libSparrow.a in Frameworks */,
 				DE5C4E6E138ED109004892CA /* libz.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -228,8 +228,8 @@
 				333D53A31541F23300E9F6B6 /* Gameboard.m */,
 				333D53A51541FFB400E9F6B6 /* GameboardSpace.h */,
 				333D53A61541FFB400E9F6B6 /* GameboardSpace.m */,
-				338F183D1562EC6700F2C363 /* Block.h */,
-				338F183E1562EC6700F2C363 /* Block.m */,
+				333E24F1156322F40093E578 /* Block.h */,
+				333E24F2156322F50093E578 /* Block.m */,
 				33B67DED1545296800CA85B2 /* MainMenuController.h */,
 				33B67DEE1545296800CA85B2 /* MainMenuController.m */,
 				33B67DEF1545296800CA85B2 /* MainMenuController.xib */,
@@ -400,7 +400,7 @@
 				333D53A71541FFB400E9F6B6 /* GameboardSpace.m in Sources */,
 				33F7F247154331590069B49E /* FlickDynamics.m in Sources */,
 				33B67DF01545296900CA85B2 /* MainMenuController.m in Sources */,
-				338F183F1562EC6700F2C363 /* Block.m in Sources */,
+				333E24F3156322F50093E578 /* Block.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,10 +420,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Richard-gfstkhvfwxtkjffgsijzzeaadqll/Build/Products/Debug-iphoneos\"",
+					"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Richard-gfstkhvfwxtkjffgsijzzeaadqll/Build/Products/Debug-iphoneos",
 				);
 				PRODUCT_NAME = Richard;
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "${SPARROW_SRC}/**";
 			};
 			name = Debug;
 		};
@@ -438,11 +439,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Richard-gfstkhvfwxtkjffgsijzzeaadqll/Build/Products/Debug-iphoneos\"",
+					"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Richard-gfstkhvfwxtkjffgsijzzeaadqll/Build/Products/Debug-iphoneos",
 				);
 				PRODUCT_NAME = Richard;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "$(inherited)";
+				USER_HEADER_SEARCH_PATHS = "${SPARROW_SRC}/**";
 			};
 			name = Release;
 		};

@@ -15,7 +15,6 @@
     [super dealloc];
 }
 
-@synthesize resident;
 @synthesize size;
 @synthesize marked = mMarked;
 
