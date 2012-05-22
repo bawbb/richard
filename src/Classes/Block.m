@@ -24,7 +24,7 @@
     if ((self = [super init]))
     {
         // setup and add movieclip child for rotation animation
-        blockMovie = [[SPMovieClip alloc] initWithFrames:[Media atlasTexturesWithPrefix:@"BlockStandard_MoveAnimation"] fps:15];
+        blockMovie = [[SPMovieClip alloc] initWithFrames:[Media atlasTexturesWithPrefix:@"BlockStandard_MoveAnimation"] fps:30];
         blockMovie.loop = NO;
         blockMovie.pivotX = blockMovie.width / 2;
         blockMovie.pivotY = blockMovie.height / 2;
@@ -68,7 +68,9 @@
 - (void)setCurrentSpace:(GameboardSpace *)currentSpace
 {
     // Moving to new space
+    mCurrentSpace.resident = nil;
     mCurrentSpace = currentSpace;
+    mCurrentSpace.resident = self;
     
     // Tween movement
     SPTween *moveTween = [SPTween tweenWithTarget:self time:1.0 transition:SP_TRANSITION_EASE_OUT];
@@ -79,13 +81,15 @@
     [blockMovie play];
     
     if (mCurrentSpace.marked)
-        self.alpha = 0.85;
+        self.alpha = 0.75;
     else
         self.alpha = 1.0;
 }
 
 - (void)fallOffAndDie
 {
+    mCurrentSpace.resident = nil;
+    
     SPTween *scaleTween = [SPTween tweenWithTarget:[self childAtIndex:0] time:2.0 transition:SP_TRANSITION_EASE_IN];
     [scaleTween animateProperty:@"scaleX" targetValue:0];
     [scaleTween animateProperty:@"scaleY" targetValue:0];
@@ -105,6 +109,8 @@
 
 - (void)kill
 {
+    mCurrentSpace.resident = nil;
+    
     [self.parent setIndex:self.parent.numChildren - 1 ofChild:self];
     
     SPTween *scaleTween = [SPTween tweenWithTarget:[self childAtIndex:0] time:0.5 transition:SP_TRANSITION_EASE_OUT_IN];

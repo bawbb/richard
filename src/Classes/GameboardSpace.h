@@ -7,6 +7,7 @@
 //
 
 #import "SPImage.h"
+@class Block;
 
 @interface GameboardSpace : SPImage
 {
@@ -20,5 +21,11 @@
 
 // square size of block
 @property (nonatomic, assign) float size;
+
+// current block currently on top of space
+@property (nonatomic, assign) Block *resident;
+
+// is the space reachable by player?
+@property (nonatomic, assign) BOOL reachable;
 
 @end

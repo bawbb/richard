@@ -17,6 +17,8 @@
 
 @synthesize size;
 @synthesize marked = mMarked;
+@synthesize resident = mResident;
+@synthesize reachable = mReachable;
 
 - (id)initWithPositionAndSize :(float)initsize :(float)x :(float)y
 {
@@ -29,6 +31,8 @@
         self.height = initsize;
         self.size = initsize;
         mMarked = NO;
+        self.reachable = YES;
+        mResident = nil;
     }
     
     return self;
@@ -52,9 +56,28 @@
         }
         else // Unmark the space
             self.texture = [Media atlasTexture: @"GameboardSpace"];
+        
+        mMarked = marked;
+    }
+}
+
+- (BOOL)reachable
+{
+    return  mReachable;
+}
+
+- (void)setReachable:(BOOL)reachable
+{
+    if (reachable)
+    {
+        self.color = 0xFFDDDD;
+    }
+    else
+    {
+        self.color = 0xFFFFFF;
     }
     
-    mMarked = marked;
+    mReachable = reachable;
 }
 
 @end

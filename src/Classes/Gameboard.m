@@ -20,6 +20,8 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
 - (void)onTouch :(SPTouchEvent *)event;
 - (void)onFrame :(SPEvent *)event;
 - (void)onAdded :(SPEvent *)event;
+- (void)updateSpacesWithinReach;
+- (void)markAndcheckSurroundingSpacesforReach :(int)index;
 
 // checks on interval if blocks should tick down or if game is over
 - (void)checkBlockTick;
@@ -178,6 +180,9 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
         
         [currentBlocks release];
         [self performSelector:@selector(checkBlockTick) withObject:nil afterDelay:BLOCK_TICK_TIME];
+        
+        [self updateSpacesWithinReach];
+        
         NSLog(@"Tick: %i blocks left.", mBlocks.count);
     }
     else
@@ -234,15 +239,25 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
             {
                 [self markSpace :((GameboardSpace *)t)];
             }
+            // if player touched block and mark was under block
+            // kill the block cause player wanted to kill it
             else if ([t.parent isKindOfClass:[Block class]])
             {
-                NSLog(@"BOOOM!");
                 if(((Block *)t.parent).currentSpace.marked)
                 {
                     [(Block *)t.parent kill];
                     [mBlocks removeObject:(Block *)t.parent];
                     mCurrentSpace.marked = NO;
                     mCurrentSpace = nil;
+                    
+                    // update reach cause block is now gone
+                    // TODO:thgis is not working. and i'm drunk now.
+                    // it seeems to be marking all the spaces as reachable and
+                    // then wait until the next "block tick" to actually accurately
+                    // portay the real reachable blocks. ug
+                    [self updateSpacesWithinReach];
+                    
+                    NSLog(@"BOOOM!");
                 }
             }
         }
@@ -287,6 +302,37 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
         mCurrentSpace = space;
         mCurrentSpace.marked = YES;
     }
+}
+
+- (void)updateSpacesWithinReach
+{
+    // set all spaces to unreachable so we can proceed with setting them reachable
+    for (GameboardSpace *space in mSpaces)
+        space.reachable = NO;
+    
+    // start reachable flood fill with last space
+    [self markAndcheckSurroundingSpacesforReach:mSpaces.count - 1];
+}
+
+- (void)markAndcheckSurroundingSpacesforReach:(int)index
+{
+    // if out of range, return
+    if (index < 0 || index > mSpaces.count - 1)
+        return;
+    
+    GameboardSpace *space = [mSpaces objectAtIndex:index];
+    
+    // mark reachable if no block is resident and not already marked
+    // then recurrsively call for north east south and west
+    if (space.resident == nil && space.reachable == NO)
+    {
+        space.reachable = YES;
+        [self markAndcheckSurroundingSpacesforReach:index - mColumns];
+        [self markAndcheckSurroundingSpacesforReach:index + 1];
+        [self markAndcheckSurroundingSpacesforReach:index + mColumns];
+        [self markAndcheckSurroundingSpacesforReach:index - 1];
+    }
+    
 }
 
 @end

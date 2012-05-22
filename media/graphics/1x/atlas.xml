@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:28da4c5b90ed1d37668025ae72d5bcfc$ -->
+<!-- $TexturePacker:SmartUpdate:d5b28375feb62390fd85f8f73403c25b$ -->
 <TextureAtlas imagePath="atlas.png">
     <SubTexture name="BlockStandard_MoveAnimation0001" x="5" y="5" width="40" height="45"/>
     <SubTexture name="BlockStandard_MoveAnimation0002" x="50" y="5" width="40" height="45"/>
@@ -17,9 +17,23 @@
     <SubTexture name="BlockStandard_MoveAnimation0013" x="95" y="105" width="40" height="45"/>
     <SubTexture name="BlockStandard_MoveAnimation0014" x="140" y="105" width="40" height="45"/>
     <SubTexture name="BlockStandard_MoveAnimation0015" x="185" y="105" width="40" height="45"/>
-    <SubTexture name="BlockStandard_MoveAnimation0016" x="5" y="5" width="40" height="45"/>
-    <SubTexture name="GameboardEdge_End" x="5" y="155" width="40" height="40"/>
-    <SubTexture name="GameboardEdge_Mid" x="50" y="155" width="40" height="40"/>
-    <SubTexture name="GameboardSpace" x="95" y="155" width="40" height="40"/>
-    <SubTexture name="GameboardSpace_Marked" x="140" y="155" width="40" height="40"/>
+    <SubTexture name="BlockStandard_MoveAnimation0016" x="5" y="155" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0017" x="50" y="155" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0018" x="95" y="155" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0019" x="140" y="155" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0020" x="185" y="155" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0021" x="5" y="205" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0022" x="50" y="205" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0023" x="95" y="205" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0024" x="140" y="205" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0025" x="185" y="205" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0026" x="5" y="255" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0027" x="50" y="255" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0028" x="95" y="255" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0029" x="140" y="255" width="40" height="45"/>
+    <SubTexture name="BlockStandard_MoveAnimation0030" x="185" y="255" width="40" height="45"/>
+    <SubTexture name="GameboardEdge_End" x="5" y="305" width="40" height="40"/>
+    <SubTexture name="GameboardEdge_Mid" x="50" y="305" width="40" height="40"/>
+    <SubTexture name="GameboardSpace" x="95" y="305" width="40" height="40"/>
+    <SubTexture name="GameboardSpace_Marked" x="140" y="305" width="40" height="40"/>
 </TextureAtlas>
