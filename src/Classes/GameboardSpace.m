@@ -19,6 +19,7 @@
 @synthesize marked = mMarked;
 @synthesize resident = mResident;
 @synthesize reachable = mReachable;
+@synthesize occupied;
 
 - (id)initWithPositionAndSize :(float)initsize :(float)x :(float)y
 {
@@ -31,7 +32,7 @@
         self.height = initsize;
         self.size = initsize;
         mMarked = NO;
-        self.reachable = YES;
+        self.reachable = NO;
         mResident = nil;
     }
     
@@ -61,23 +62,50 @@
     }
 }
 
+- (BOOL) occupied
+{
+    if (mResident == nil)
+        return NO;
+    else
+        return YES;
+}
+
+- (Block *)resident
+{
+    return mResident;
+}
+
+- (void)setResident:(Block *)resident
+{
+    if (resident != nil)
+        mResident = [resident retain];
+    else
+    {
+        [mResident release];
+        mResident = nil;
+    }
+}
+
 - (BOOL)reachable
 {
-    return  mReachable;
+    return mReachable;
 }
 
 - (void)setReachable:(BOOL)reachable
 {
-    if (reachable)
+    if (reachable != mReachable)
     {
-        self.color = 0xFFDDDD;
+        if (reachable)
+        {
+            self.color = 0xFFDDDD;
+        }
+        else
+        {
+            self.color = 0xFFFFFF;
+        }
+        
+        mReachable = reachable;
     }
-    else
-    {
-        self.color = 0xFFFFFF;
-    }
-    
-    mReachable = reachable;
 }
 
 @end

@@ -10,9 +10,6 @@
 @class Block;
 
 @interface GameboardSpace : SPImage
-{
-    @private
-}
 
 - (id)initWithPositionAndSize :(float)size :(float)x :(float)y;
 
@@ -24,6 +21,8 @@
 
 // current block currently on top of space
 @property (nonatomic, assign) Block *resident;
+
+@property (readonly) BOOL occupied;
 
 // is the space reachable by player?
 @property (nonatomic, assign) BOOL reachable;

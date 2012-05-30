@@ -21,7 +21,7 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
 - (void)onFrame :(SPEvent *)event;
 - (void)onAdded :(SPEvent *)event;
 - (void)updateSpacesWithinReach;
-- (void)markAndcheckSurroundingSpacesforReach :(int)index;
+- (void)markAndcheckSurroundingSpacesforReach:(int)index;
 
 // checks on interval if blocks should tick down or if game is over
 - (void)checkBlockTick;
@@ -86,7 +86,17 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
                 GameboardSpace *space = [[GameboardSpace alloc] initWithPositionAndSize :mSpaceSize :c * mSpaceSize :r * mSpaceSize];
                 [mSpaces addObject :space];
                 [self addChild :space];
+                
+                // uncomment this stuff to add a textfield on
+                // each block for some debuging or whatever
+                //SPTextField *spaceLabel = [[SPTextField alloc] initWithText:[NSString stringWithFormat:@"%i", mSpaces.count - 1]];
+                //spaceLabel.x = space.x - (mSpaceSize / 2);
+                //spaceLabel.y = space.y - (mSpaceSize / 2);
+                //spaceLabel.touchable = NO;
+                //[self addChild:spaceLabel];
+                
                 [space release];
+                //[spaceLabel release];
             }
             // last row, so add end cap images
             else
@@ -126,7 +136,8 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
         }
     }
     
-    // Add a random temporary level with blocks of two rows
+    // Add a temporary level with blocks of two rows
+    // this is where we would load the level from the level factory class
     mBlocks = [[NSMutableArray array] retain];
     for (int b = 0; b < mColumns * (mRows / 4); b++)
     {
@@ -135,8 +146,11 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
         Block *block = [[Block alloc] initAtSpace:bSpace];
         [mBlocks addObject:block];
         [self addChild:block];
+        bSpace.resident = block;
         [block release];
     }
+    
+    [self updateSpacesWithinReach];
     
     // is the gameboard large enough to need to scroll?
     mScrollingNeeded = self.height > self.stage.height ? YES : NO;
@@ -157,11 +171,13 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
     // Blocks still left?
     if (mBlocks.count > 0)
     {
-        // Tick the blocks down, add another tick
-        NSArray *currentBlocks = [[NSArray alloc] initWithArray:mBlocks];
-        
-        for (Block *block in currentBlocks)
+        // reverse enumeration, since the blocks move down.
+        // other wise we'll be setting the current space ahead to
+        // a space we haven't checked yet.
+        for (int i = mBlocks.count; i > 0; i--)
         {
+            Block *block = [mBlocks objectAtIndex:i - 1];
+            
             // find next rows space index
             int nextSpaceIndex = [mSpaces indexOfObject:block.currentSpace] + mColumns;
             
@@ -178,12 +194,11 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
             }
         }
         
-        [currentBlocks release];
         [self performSelector:@selector(checkBlockTick) withObject:nil afterDelay:BLOCK_TICK_TIME];
         
-        [self updateSpacesWithinReach];
-        
         NSLog(@"Tick: %i blocks left.", mBlocks.count);
+        
+        [self updateSpacesWithinReach];
     }
     else
     {
@@ -235,29 +250,31 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
         {
             SPImage *t = (SPImage *)event.target;
             
+            // if is space and reachable
             if ([t isKindOfClass :[GameboardSpace class]])
             {
-                [self markSpace :((GameboardSpace *)t)];
+                GameboardSpace *space = (GameboardSpace *)t;
+                
+                if (space.reachable)
+                    [self markSpace :space];
             }
+            
             // if player touched block and mark was under block
             // kill the block cause player wanted to kill it
             else if ([t.parent isKindOfClass:[Block class]])
             {
-                if(((Block *)t.parent).currentSpace.marked)
+                Block *block = (Block *)t.parent;
+                
+                if(block.currentSpace.marked)
                 {
-                    [(Block *)t.parent kill];
-                    [mBlocks removeObject:(Block *)t.parent];
+                    NSLog(@"Killing block: %@", block);
+                    
+                    [block kill];
+                    [mBlocks removeObject:block];
                     mCurrentSpace.marked = NO;
                     mCurrentSpace = nil;
                     
-                    // update reach cause block is now gone
-                    // TODO:thgis is not working. and i'm drunk now.
-                    // it seeems to be marking all the spaces as reachable and
-                    // then wait until the next "block tick" to actually accurately
-                    // portay the real reachable blocks. ug
                     [self updateSpacesWithinReach];
-                    
-                    NSLog(@"BOOOM!");
                 }
             }
         }
@@ -308,10 +325,25 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
 {
     // set all spaces to unreachable so we can proceed with setting them reachable
     for (GameboardSpace *space in mSpaces)
+    {
         space.reachable = NO;
+        
+        int index = [mSpaces indexOfObject:space];
+        
+        if (space.occupied)
+            NSLog(@"Space %i occupied", index);
+        else
+            NSLog(@"Space %i free", index);
+    }
     
-    // start reachable flood fill with last space
-    [self markAndcheckSurroundingSpacesforReach:mSpaces.count - 1];
+    // start calculated where the reachable spaces are
+    // starting with the first space that doesnt have a resident
+    int firstIndexWithoutResident = mSpaces.count - 1;
+    
+    while (((GameboardSpace *)[mSpaces objectAtIndex:firstIndexWithoutResident]).resident != nil)
+        firstIndexWithoutResident--;
+    
+    [self markAndcheckSurroundingSpacesforReach:firstIndexWithoutResident];
 }
 
 - (void)markAndcheckSurroundingSpacesforReach:(int)index
@@ -324,15 +356,15 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
     
     // mark reachable if no block is resident and not already marked
     // then recurrsively call for north east south and west
-    if (space.resident == nil && space.reachable == NO)
+    if (!space.occupied && !space.reachable)
     {
         space.reachable = YES;
+        
         [self markAndcheckSurroundingSpacesforReach:index - mColumns];
         [self markAndcheckSurroundingSpacesforReach:index + 1];
         [self markAndcheckSurroundingSpacesforReach:index + mColumns];
         [self markAndcheckSurroundingSpacesforReach:index - 1];
     }
-    
 }
 
 @end
