@@ -7,8 +7,7 @@
 //
 
 #import "SPSprite.h"
-
-@class GameboardSpace;
+#import "GameboardSpace.h"
 
 @interface Block : SPSprite
 {

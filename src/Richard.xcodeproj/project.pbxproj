@@ -15,12 +15,12 @@
 		333D53A41541F23400E9F6B6 /* Gameboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D53A31541F23300E9F6B6 /* Gameboard.m */; };
 		333D53A71541FFB400E9F6B6 /* GameboardSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D53A61541FFB400E9F6B6 /* GameboardSpace.m */; };
 		333E24E515630D5F0093E578 /* libSparrow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F51A70155F103800E4A69C /* libSparrow.a */; };
-		333E24F3156322F50093E578 /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 333E24F2156322F50093E578 /* Block.m */; };
 		3383D097155E18FD00DFD0A7 /* atlas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383D096155E18FD00DFD0A7 /* atlas@2x.png */; };
 		3383D0A1155E21EF00DFD0A7 /* atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383D0A0155E21EF00DFD0A7 /* atlas.png */; };
 		33B67DF01545296900CA85B2 /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B67DEE1545296800CA85B2 /* MainMenuController.m */; };
 		33B67DF11545296900CA85B2 /* MainMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33B67DEF1545296800CA85B2 /* MainMenuController.xib */; };
 		33F7F247154331590069B49E /* FlickDynamics.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F7F246154331590069B49E /* FlickDynamics.m */; };
+		CEC6B8A115801DF900832A0C /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6B8A015801DF900832A0C /* Block.m */; };
 		DE1FBDFD14F831A300E86642 /* SPResizeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1FBDFC14F831A300E86642 /* SPResizeEvent.m */; };
 		DE3F093811B7B9DC009D4DB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F093711B7B9DC009D4DB0 /* AVFoundation.framework */; };
 		DE3F093A11B7B9DC009D4DB0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F093911B7B9DC009D4DB0 /* AudioToolbox.framework */; };
@@ -74,8 +74,6 @@
 		333D53A31541F23300E9F6B6 /* Gameboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gameboard.m; sourceTree = "<group>"; };
 		333D53A51541FFB400E9F6B6 /* GameboardSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameboardSpace.h; sourceTree = "<group>"; };
 		333D53A61541FFB400E9F6B6 /* GameboardSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameboardSpace.m; sourceTree = "<group>"; };
-		333E24F1156322F40093E578 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
-		333E24F2156322F50093E578 /* Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.m; sourceTree = "<group>"; };
 		336EFA3E155F0ED500553F64 /* Sparrow.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Sparrow.xcodeproj; sourceTree = SPARROW_SRC; };
 		3383D096155E18FD00DFD0A7 /* atlas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "atlas@2x.png"; sourceTree = "<group>"; };
 		3383D0A0155E21EF00DFD0A7 /* atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atlas.png; sourceTree = "<group>"; };
@@ -85,6 +83,8 @@
 		33F7F245154331590069B49E /* FlickDynamics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickDynamics.h; sourceTree = "<group>"; };
 		33F7F246154331590069B49E /* FlickDynamics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickDynamics.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* App-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		CEC6B8A015801DF900832A0C /* Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.m; sourceTree = "<group>"; };
+		CEC6B8A215801DFF00832A0C /* Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		DE1FBDFB14F831A300E86642 /* SPResizeEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPResizeEvent.h; sourceTree = "<group>"; };
 		DE1FBDFC14F831A300E86642 /* SPResizeEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPResizeEvent.m; sourceTree = "<group>"; };
 		DE3F093711B7B9DC009D4DB0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -228,8 +228,8 @@
 				333D53A31541F23300E9F6B6 /* Gameboard.m */,
 				333D53A51541FFB400E9F6B6 /* GameboardSpace.h */,
 				333D53A61541FFB400E9F6B6 /* GameboardSpace.m */,
-				333E24F1156322F40093E578 /* Block.h */,
-				333E24F2156322F50093E578 /* Block.m */,
+				CEC6B8A215801DFF00832A0C /* Block.h */,
+				CEC6B8A015801DF900832A0C /* Block.m */,
 				33B67DED1545296800CA85B2 /* MainMenuController.h */,
 				33B67DEE1545296800CA85B2 /* MainMenuController.m */,
 				33B67DEF1545296800CA85B2 /* MainMenuController.xib */,
@@ -400,7 +400,7 @@
 				333D53A71541FFB400E9F6B6 /* GameboardSpace.m in Sources */,
 				33F7F247154331590069B49E /* FlickDynamics.m in Sources */,
 				33B67DF01545296900CA85B2 /* MainMenuController.m in Sources */,
-				333E24F3156322F50093E578 /* Block.m in Sources */,
+				CEC6B8A115801DF900832A0C /* Block.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
