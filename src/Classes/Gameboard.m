@@ -22,9 +22,6 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
 - (void)updateSpacesWithinReach;
 - (void)markAndcheckSurroundingSpacesforReach:(int)index;
 
-// checks on interval if blocks should tick down or if game is over
-- (void)checkBlockTick;
-
 @end
 
 @implementation Gameboard
@@ -133,21 +130,7 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
             }
         }
     }
-    
-    // Add a temporary level with blocks of two rows
-    // this is where we would load the level from the level factory class
-    mBlocks = [[NSMutableArray array] retain];
-    for (int b = 0; b < mColumns * (mRows / 4); b++)
-    {
-        GameboardSpace *bSpace = [mSpaces objectAtIndex:b];
-        
-        Block *block = [[Block alloc] initAtSpace:bSpace];
-        [mBlocks addObject:block];
-        [self addChild:block];
-        bSpace.resident = block;
-        [block release];
-    }
-    
+
     [self updateSpacesWithinReach];
     
     // is the gameboard large enough to need to scroll?
@@ -159,55 +142,6 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
     mFlickControl = [[FlickDynamics flickDynamicsWithViewportWidth :deviceWidth viewportHeight :deviceHeight - PADDING scrollBoundsLeft :0 scrollBoundsTop :-(self.height + mSpaceSize) + deviceHeight scrollBoundsRight: deviceWidth scrollBoundsBottom :deviceHeight animationRate: 1.0f / [SPStage mainStage].frameRate ] retain];
     mFlickControl.currentScrollTop = PADDING;
     [self addEventListener :@selector(onTouch:) atObject :self forType :SP_EVENT_TYPE_TOUCH];
-    
-    // Delayed method call to check when to move blocks down
-    [self performSelector:@selector(checkBlockTick) withObject:nil afterDelay:BLOCK_TICK_TIME];
-}
-
-- (void)checkBlockTick
-{
-    // Blocks still left?
-    if (mBlocks.count > 0)
-    {
-        // reverse enumeration, since the blocks move down.
-        // other wise we'll be setting the current space ahead to
-        // a space we haven't checked yet.
-        for (int i = mBlocks.count; i > 0; i--)
-        {
-            Block *block = [mBlocks objectAtIndex:i - 1];
-            
-            // find next rows space index
-            int nextSpaceIndex = [mSpaces indexOfObject:block.currentSpace] + mColumns;
-            
-            // if theres stil a space to move to, move there
-            // otherwise, fall off end
-            if (nextSpaceIndex < mSpaces.count)
-            {
-                block.currentSpace = [mSpaces objectAtIndex:nextSpaceIndex];
-            }
-            else
-            {
-                [block fallOffAndDie];
-                [mBlocks removeObject:block];
-            }
-        }
-        
-        [self performSelector:@selector(checkBlockTick) withObject:nil afterDelay:BLOCK_TICK_TIME];
-        
-        NSLog(@"Tick: %i blocks left.", mBlocks.count);
-        
-        [self updateSpacesWithinReach];
-    }
-    else
-    {
-        // All blocks gone, next stage.
-        NSLog(@"Next Stage");
-    }
-}
-
-- (void)stopBlockTick
-{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkBlockTick) object:nil];
 }
 
 - (void)onTouch :(SPTouchEvent *)event
@@ -255,25 +189,6 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
                 
                 if (space.reachable)
                     [self markSpace :space];
-            }
-            
-            // if player touched block and mark was under block
-            // kill the block cause player wanted to kill it
-            else if ([t.parent isKindOfClass:[Block class]])
-            {
-                Block *block = (Block *)t.parent;
-                
-                if(block.currentSpace.marked)
-                {
-                    NSLog(@"Killing block: %@", block);
-                    
-                    [block kill];
-                    [mBlocks removeObject:block];
-                    mCurrentSpace.marked = NO;
-                    mCurrentSpace = nil;
-                    
-                    [self updateSpacesWithinReach];
-                }
             }
         }
         

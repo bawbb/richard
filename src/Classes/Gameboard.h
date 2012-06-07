@@ -7,7 +7,6 @@
 //
 
 #import "SPSprite.h"
-#import "Game.h"
 #import "GameboardSpace.h"
 #import "FlickDynamics.h"
 
@@ -38,9 +37,6 @@
     // Calculates Gameboard movement animation
     FlickDynamics *mFlickControl;
 }
-
-// Should be called when player quits to kill the next block tick timer
-- (void) stopBlockTick;
 
 - (id)init :(int)columns :(int)rows;
 

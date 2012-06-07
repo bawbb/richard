@@ -4,8 +4,6 @@
 //
 
 #import "Game.h"
-#import "Gameboard.h"
-#import "MainMenuController.h"
 
 // --- private interface ---------------------------------------------------------------------------
 
@@ -72,7 +70,6 @@
 {
     [sender removeFromSuperview];
     [sender removeTarget:self action:@selector(quitHandler:) forControlEvents:UIControlEventTouchUpInside];
-    [mGameboard stopBlockTick];
     SPEvent *event = [SPEvent eventWithType:@"openMainMenuRequested" bubbles:YES];
     [self dispatchEvent:event];
 }

@@ -5,7 +5,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIDevice.h>
-@class Gameboard;
+#import "Gameboard.h"
+#import "MainMenuController.h"
 
 @interface Game : SPSprite
 {
