@@ -8,7 +8,6 @@
 
 #import "Foundation/Foundation.h"
 #import "Gameboard.h"
-#import "Block.h"
 
 const int PADDING = 25; // Padding for around edge of gameboard
 const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
@@ -51,7 +50,6 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
     [mFlickControl release];
     [mCurrentSpace release];
     [mSpaces release];
-    [mBlocks release];
     [super dealloc];
 }
 
