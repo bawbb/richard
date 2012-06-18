@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Foundation/Foundation.h"
 #import "Gameboard.h"
+#import "GameboardSpace.h"
+#import "FlickDynamics.h"
+#import "Block.h"
 
 const int PADDING = 25; // Padding for around edge of gameboard
 const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
@@ -19,8 +21,10 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
 - (void)onTouch :(SPTouchEvent *)event;
 - (void)onFrame :(SPEvent *)event;
 - (void)onAdded :(SPEvent *)event;
+- (void)onRemoved :(SPEvent *)event;
 - (void)updateSpacesWithinReach;
 - (void)markAndcheckSurroundingSpacesforReach:(int)index;
+- (void)checkBlockTick;
 
 @end
 
@@ -36,6 +40,7 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
         
         // Wait for me to be added to parent to setup
         [self addEventListener :@selector(onAdded:) atObject :self forType :SP_EVENT_TYPE_ADDED_TO_STAGE];
+        [self addEventListener:@selector(onRemoved:) atObject:self forType:SP_EVENT_TYPE_REMOVED_FROM_STAGE];
     }
     
     return self;
@@ -44,9 +49,11 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
 - (void)dealloc
 {
     [self removeEventListenersAtObject :self forType :SP_EVENT_TYPE_TOUCH];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [mFlickControl release];
     [mCurrentSpace release];
     [mSpaces release];
+    [mBlocks release];
     [super dealloc];
 }
 
@@ -54,6 +61,12 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
 {
     // I'm added, set me up
     [self setup];
+}
+
+- (void)onRemoved :(SPEvent *)event
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    //[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkBlockTick) object:nil];
 }
 
 - (void)setup
@@ -130,8 +143,19 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
             }
         }
     }
-
+    
+    mBlocks = [[NSMutableArray array] retain];
+    // TODO: add level blocks
+    for (int i = 0; i < mColumns * 2; i++)
+    {
+        Block *block = [[Block alloc] initAtGameboardSpace:[mSpaces objectAtIndex:i]];
+        [self addChild:block];
+        [mBlocks addObject:block];
+        [block release];
+    }
+    
     [self updateSpacesWithinReach];
+    [self performSelector:@selector(checkBlockTick) withObject:nil afterDelay:BLOCK_TICK_TIME];
     
     // is the gameboard large enough to need to scroll?
     mScrollingNeeded = self.height > self.stage.height ? YES : NO;
@@ -190,6 +214,25 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
                 if (space.reachable)
                     [self markSpace :space];
             }
+            
+            // if player touched block and mark was under block
+            // kill the block cause player wanted to kill it
+            else if ([t.parent isKindOfClass:[Block class]])
+            {
+                Block *block = (Block *)t.parent;
+                
+                if(block.currentSpace.marked)
+                {
+                    NSLog(@"Killing block: %@", block);
+                    
+                    [block kill];
+                    [mBlocks removeObject:block];
+                    mCurrentSpace.marked = NO;
+                    mCurrentSpace = nil;
+                    
+                    [self updateSpacesWithinReach];
+                }
+            }
         }
         
         [mFlickControl endTouchAtX :currentPos.x y :currentPos.y];
@@ -234,26 +277,63 @@ const double BLOCK_TICK_TIME = 4.0; // Time inbetween blocks tick down
     }
 }
 
+- (void)checkBlockTick
+{
+    // Blocks still left?
+    if (mBlocks.count > 0)
+    {
+        // reverse enumeration, since the blocks move down.
+        // other wise we'll be setting the current space ahead to
+        // a space we haven't checked yet.
+        for (int i = mBlocks.count - 1; i >= 0; i--)
+        {
+            // set currentspace of block to one row ahead of it's now currentspace
+            Block *block = [mBlocks objectAtIndex:i];
+            int nextIndex = [mSpaces indexOfObject:block.currentSpace] + mColumns;
+            
+            if (nextIndex < mSpaces.count)
+            {
+                block.currentSpace = [mSpaces objectAtIndex:nextIndex];
+            }
+            else
+            {
+                [mBlocks removeObject:block];
+                [block fallOffEnd];
+            }
+        }
+        
+        [self performSelector:@selector(checkBlockTick) withObject:nil afterDelay:BLOCK_TICK_TIME];
+        
+        NSLog(@"Tick: %i blocks left.", mBlocks.count);
+        
+        [self updateSpacesWithinReach];
+    }
+    else
+    {
+        // All blocks gone, next stage.
+        NSLog(@"Next Stage");
+    }
+}
+
+- (id) retain
+{
+    // Break here to see who is retaining me.
+    return [super retain];
+}
+
 - (void)updateSpacesWithinReach
 {
     // set all spaces to unreachable so we can proceed with setting them reachable
     for (GameboardSpace *space in mSpaces)
     {
         space.reachable = NO;
-        
-        int index = [mSpaces indexOfObject:space];
-        
-        if (space.occupied)
-            NSLog(@"Space %i occupied", index);
-        else
-            NSLog(@"Space %i free", index);
     }
     
     // start calculated where the reachable spaces are
     // starting with the first space that doesnt have a resident
     int firstIndexWithoutResident = mSpaces.count - 1;
     
-    while (((GameboardSpace *)[mSpaces objectAtIndex:firstIndexWithoutResident]).resident != nil)
+    while (((GameboardSpace *)[mSpaces objectAtIndex:firstIndexWithoutResident]).occupied)
         firstIndexWithoutResident--;
     
     [self markAndcheckSurroundingSpacesforReach:firstIndexWithoutResident];

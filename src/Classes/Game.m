@@ -36,7 +36,7 @@
 {
     // release any resources here
     [self removeEventListenersAtObject:self forType:SP_EVENT_TYPE_RESIZE];
-    [mGameboard release];
+    //[mGameboard release];
     [super dealloc];
 }
 
@@ -52,7 +52,7 @@
     [self addChild:background];
     
     // Setup gameBoard with the right columns and rows from game config
-    mGameboard = [[Gameboard alloc] init :[[gameConfig valueForKey:@"columns"] intValue] :[[gameConfig valueForKey:@"rows"] intValue]];
+    Gameboard *mGameboard = [[Gameboard alloc] init :[[gameConfig valueForKey:@"columns"] intValue] :[[gameConfig valueForKey:@"rows"] intValue]];
     [self addChild:mGameboard];
     
     // add button for going back to menu
@@ -62,6 +62,7 @@
     [menuButton addTarget:self action:@selector(onMenuButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
     [[SPStage mainStage].nativeView addSubview:menuButton];
     
+    [mGameboard release];
     [background release];
     [menuButton release];
 }

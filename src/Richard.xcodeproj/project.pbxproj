@@ -20,6 +20,7 @@
 		33B67DF01545296900CA85B2 /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B67DEE1545296800CA85B2 /* MainMenuController.m */; };
 		33B67DF11545296900CA85B2 /* MainMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33B67DEF1545296800CA85B2 /* MainMenuController.xib */; };
 		33F7F247154331590069B49E /* FlickDynamics.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F7F246154331590069B49E /* FlickDynamics.m */; };
+		CE46A5C81581684B0059CE6F /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46A5C71581684B0059CE6F /* Block.m */; };
 		DE1FBDFD14F831A300E86642 /* SPResizeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1FBDFC14F831A300E86642 /* SPResizeEvent.m */; };
 		DE3F093811B7B9DC009D4DB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F093711B7B9DC009D4DB0 /* AVFoundation.framework */; };
 		DE3F093A11B7B9DC009D4DB0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F093911B7B9DC009D4DB0 /* AudioToolbox.framework */; };
@@ -82,6 +83,8 @@
 		33F7F245154331590069B49E /* FlickDynamics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickDynamics.h; sourceTree = "<group>"; };
 		33F7F246154331590069B49E /* FlickDynamics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickDynamics.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* App-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		CE46A5C61581684B0059CE6F /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
+		CE46A5C71581684B0059CE6F /* Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.m; sourceTree = "<group>"; };
 		DE1FBDFB14F831A300E86642 /* SPResizeEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPResizeEvent.h; sourceTree = "<group>"; };
 		DE1FBDFC14F831A300E86642 /* SPResizeEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPResizeEvent.m; sourceTree = "<group>"; };
 		DE3F093711B7B9DC009D4DB0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -225,6 +228,8 @@
 				333D53A31541F23300E9F6B6 /* Gameboard.m */,
 				333D53A51541FFB400E9F6B6 /* GameboardSpace.h */,
 				333D53A61541FFB400E9F6B6 /* GameboardSpace.m */,
+				CE46A5C61581684B0059CE6F /* Block.h */,
+				CE46A5C71581684B0059CE6F /* Block.m */,
 				33B67DED1545296800CA85B2 /* MainMenuController.h */,
 				33B67DEE1545296800CA85B2 /* MainMenuController.m */,
 				33B67DEF1545296800CA85B2 /* MainMenuController.xib */,
@@ -395,6 +400,7 @@
 				333D53A71541FFB400E9F6B6 /* GameboardSpace.m in Sources */,
 				33F7F247154331590069B49E /* FlickDynamics.m in Sources */,
 				33B67DF01545296900CA85B2 /* MainMenuController.m in Sources */,
+				CE46A5C81581684B0059CE6F /* Block.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,10 +418,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "App-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Richard-gfstkhvfwxtkjffgsijzzeaadqll/Build/Products/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = Richard;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SPARROW_SRC}/**";
@@ -431,10 +434,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "App-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Richard-gfstkhvfwxtkjffgsijzzeaadqll/Build/Products/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = Richard;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SPARROW_SRC}/**";

@@ -17,7 +17,6 @@
 
 @synthesize size;
 @synthesize marked = mMarked;
-@synthesize resident = mResident;
 @synthesize reachable = mReachable;
 @synthesize occupied;
 
@@ -33,7 +32,6 @@
         self.size = initsize;
         mMarked = NO;
         self.reachable = NO;
-        mResident = nil;
     }
     
     return self;
@@ -59,30 +57,6 @@
             self.texture = [Media atlasTexture: @"GameboardSpace"];
         
         mMarked = marked;
-    }
-}
-
-- (BOOL) occupied
-{
-    if (mResident == nil)
-        return NO;
-    else
-        return YES;
-}
-
-- (Block *)resident
-{
-    return mResident;
-}
-
-- (void)setResident:(Block *)resident
-{
-    if (resident != nil)
-        mResident = [resident retain];
-    else
-    {
-        [mResident release];
-        mResident = nil;
     }
 }
 

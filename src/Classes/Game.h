@@ -17,7 +17,7 @@
     float mGameHeight;
     
     // Current game board
-    Gameboard *mGameboard;
+    //Gameboard *mGameboard;
 }
 
 - (id)initWithWidth:(float)width height:(float)height;

@@ -6,9 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "SPImage.h"
-@class Block;
-
 @interface GameboardSpace : SPImage
 
 - (id)initWithPositionAndSize :(float)size :(float)x :(float)y;
@@ -19,10 +16,7 @@
 // square size of block
 @property (nonatomic, assign) float size;
 
-// current block currently on top of space
-@property (nonatomic, assign) Block *resident;
-
-@property (readonly) BOOL occupied;
+@property (nonatomic, assign) BOOL occupied;
 
 // is the space reachable by player?
 @property (nonatomic, assign) BOOL reachable;

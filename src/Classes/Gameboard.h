@@ -6,9 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "Foundation/Foundation.h"
 #import "SPSprite.h"
-#import "GameboardSpace.h"
-#import "FlickDynamics.h"
+
+@class FlickDynamics;
+@class GameboardSpace;
 
 @interface Gameboard : SPSprite
 {
